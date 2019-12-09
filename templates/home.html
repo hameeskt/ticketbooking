@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+<title>{% block title %}Home{% endblock %}</title>
+{% block content %}
+
+<div class="row">
+    <div class="col-sm" style="background-color:#343a40;">
+      {% for msg in messages %}
+        <h2 id="message">{{msg}}</h2>
+    {% endfor %}
+  </div>
+  <div class="col-sm " style="background-color:lavender;margin-left:10px;">
+
+      <form action="register" class="was-validated" method="post" >
+         {% csrf_token %}
+    <div class="form-group">
+          <label for="fname">First Name:</label>
+          <input type="text" class="form-control" id="fname" placeholder="Enter first name" name="first_name" required>
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="lname">Last Name:</label>
+          <input type="text" class="form-control" id="lname" placeholder="Enter last name" name="last_name" required>
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="unamereg">Username:</label>
+          <input type="text" class="form-control" id="unamereg" placeholder="Enter username" name="username" required>
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-mail:</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter e-mail" name="email" required>
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="pwdreg">Password:</label>
+          <input type="password" class="form-control" id="pwdreg" placeholder="Enter password" name="password1" required>
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="pwdcnfm">Confirm Password:</label>
+          <input type="password" class="form-control" id="pwdcnfm" placeholder="Enter password again" name="password2" required>
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
+  </div>
+
+</div>
+
+
+
+
+
+{% endblock %}

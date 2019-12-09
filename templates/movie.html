@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+<title>{% block title%}Tickets{% endblock %}</title>
+
+{% block content %}
+<br>
+<br>
+<div class="container">
+  <h3>Total Tickets:{{movie.tot_tickets}} | booked:{{number_booked_tickets}} | Available{{available}}</h3>
+  <form method="post" action="/book_ticket/{{movie.pk}}/" class="form-control" style="height: auto;">
+      {% csrf_token %}
+    {% for r in ran %}
+      {%if r in list%}
+        <label class="radio-inline" style="color: chocolate; text-decoration: line-through">
+          <input type="radio" name="ticket" value="{{r}}" disabled="disabled" >Ticket {{r}}
+        </label>
+      {% else %}
+        <label class="radio-inline">
+          <input type="radio" name="ticket" value="{{r}}">Ticket {{r}}
+        </label>
+      {% endif %}
+     {% endfor %}
+      <br>
+    <button type="submit" class="btn btn-outline-dark text-dark">Book</button>
+  </form>
+</div>
+
+<br>
+
+<br>
+<div class="container">
+  <h3>Ticket booked so far:</h3>
+
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th>Ticket Number</th>
+          <th>Status</th>
+          <th>Booking Time</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for tik in tickets %}
+        <tr>
+            <td>{{tik.ticket_num}}</td>
+            <td>{% if tik.status == 1 %}AVAILABLE{% else %}BOOKED{% endif %}</td>
+            <td>{{ tik.created_at|timesince }} ago</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+</div>
+{% endblock %}
