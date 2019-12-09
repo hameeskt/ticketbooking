@@ -86,7 +86,7 @@ def book_ticket(request, movie_id=None):
     ticket_num = row
     try:
         f = Ticket.objects.create(ticket_num=ticket_num, movie_id=movie_id)
-        f.save()
+        # f.save()
     except IntegrityError:
         print("ticket already reserved")
 
@@ -97,15 +97,14 @@ def movie_detail(request, movie_id=None):
     movie = Movie.objects.get(pk=movie_id)
     tickets = Ticket.objects.filter(movie=movie)
     ran = range(1, movie.tot_tickets + 1)
-    l=[]
+    l=Ticket.objects.filter(movie=movie, status=2).values_list('ticket_num', flat=True)
     rang=[]
-    for e in tickets:
-        v=e.ticket_num
-        l.append(v)
+    # for e in tickets:
+    #     v=e.ticket_num
+    #     l.append(v)
     for i in ran:
         rang.append(i)
-    actual =[elem for elem in rang if elem not in l ]
-    number_booked_tickets = len(l)
+    number_booked_tickets = tickets.count()
     available=movie.tot_tickets-number_booked_tickets
     context = {
         'list':l,
