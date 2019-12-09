@@ -99,9 +99,6 @@ def movie_detail(request, movie_id=None):
     ran = range(1, movie.tot_tickets + 1)
     l=Ticket.objects.filter(movie=movie, status=2).values_list('ticket_num', flat=True)
     rang=[]
-    # for e in tickets:
-    #     v=e.ticket_num
-    #     l.append(v)
     for i in ran:
         rang.append(i)
     number_booked_tickets = tickets.count()
@@ -116,9 +113,4 @@ def movie_detail(request, movie_id=None):
     }
     return render(request, "movie.html", context)
 
-def booked(already):
-    l=[]
-    for e in already:
-        v=e.ticket_num
-        l.append(v)
-    return l
+
