@@ -98,11 +98,12 @@ def movie_detail(request, movie_id=None):
     tickets = Ticket.objects.filter(movie=movie)
     ran = range(1, movie.tot_tickets + 1)
     l=Ticket.objects.filter(movie=movie, status=2).values_list('ticket_num', flat=True)
+    number_booked_tickets = tickets.count()
+    available = movie.tot_tickets - number_booked_tickets
     rang=[]
     for i in ran:
         rang.append(i)
-    number_booked_tickets = tickets.count()
-    available=movie.tot_tickets-number_booked_tickets
+
     context = {
         'list':l,
         'movie': movie,

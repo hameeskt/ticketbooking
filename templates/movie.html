@@ -6,7 +6,9 @@
 <br>
 <br>
 <div class="container">
-  <h3>Total Tickets:{{movie.tot_tickets}} | booked:{{number_booked_tickets}} | Available{{available}}</h3>
+  <h3 style="color: aqua;">Total Tickets : {{movie.tot_tickets}} |</h3>
+  <h4 style="color: deeppink;">booked : {{number_booked_tickets}} |</h4>
+  <h4 style="color: chartreuse;">Available : {{available}} |</h4>
   <form method="post" action="/book_ticket/{{movie.pk}}/" class="form-control" style="height: auto;">
       {% csrf_token %}
     {% for r in ran %}
